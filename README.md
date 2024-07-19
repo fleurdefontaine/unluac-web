@@ -14,9 +14,11 @@ Unluac-web menyediakan tiga opsi utama:
 
 ## Instalasi dan Penggunaan
 
-Apk Termux: ![Download here.](https://f-droid.org/repo/com.termux_1000.apk)
+Apk Termux: [Download here.](https://f-droid.org/repo/com.termux_1000.apk)
 
 ### Termux (Android)
-```pkg install curl && curl https://raw.githubusercontent.com/fleurdefontaine/unluac-web/main/setup.sh && chmod ./setup.sh && ./setup.sh```
+```bash
+pkg install curl && curl https://raw.githubusercontent.com/fleurdefontaine/unluac-web/main/setup.sh && chmod ./setup.sh && ./setup.sh
+```
 
 Jika sudah melakukan instalasi dependencies, hanya perlu "node ." di dalam directory "unluac-web".
