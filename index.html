@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unluac</title>
+    <title>Unluac Web Interface</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Unluac execution</h1>
+        <h1>Unluac Web Interface</h1>
         <form id="uploadForm">
             <input type="file" name="luaFile" accept=".lua" required>
             <div class="options-container">
@@ -26,35 +26,35 @@
                         <span>Assemble</span>
                     </label>
                 </div>
-                <div id="sOption">Selected option: Normal</div>
+                <div id="selectedOption">Selected option: Normal</div>
             </div>
             <button type="submit">Process</button>
         </form>
         <div id="result"></div>
     </div>
     <script>
-        const validOption = document.querySelectorAll('input[name="option"]');
-        const sOptionDiv = document.getElementById('sOption');
+        const optionInputs = document.querySelectorAll('input[name="option"]');
+        const optionDiv = document.getElementById('selectedOption');
 
-        validOption.forEach(input => {
+        optionInputs.forEach(input => {
             input.addEventListener('change', (e) => {
-                sOptionDiv.textContent = `Selected option: ${e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)}`;
+                optionDiv.textContent = `Selected option: ${e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)}`;
             });
         });
 
         document.getElementById('uploadForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const form = new form(e.target);
+            const formData = new FormData(e.target);
             const response = await fetch('/upload', {
                 method: 'POST',
-                body: form
+                body: formData
             });
             const blob = await response.blob();
             const downloadUrl = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = downloadUrl;
-            a.download = form.get('luaFile').name + '.dec';
+            a.download = formData.get('luaFile').name + '.dec';
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(downloadUrl);
