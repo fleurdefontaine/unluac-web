@@ -6,7 +6,7 @@ pkg install nodejs -y
 pkg install jdk-17 -y
 
 echo "Cloning repository"
-git clone https://github.com/fleurdefontaine/unluac-web.git zxc
+git clone https://github.com/fleurdefontaine/unluac-web.git
 
 echo "NPM install"
-cd zxc && npm i && node .
+cd unluac-web && npm i && node .
