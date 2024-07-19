@@ -54,4 +54,4 @@ app.post('/upload', upload.single('luaFile'), (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT} || https://localhost:3000`));
