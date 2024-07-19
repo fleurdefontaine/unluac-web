@@ -19,15 +19,15 @@ app.post('/upload', upload.single('luaFile'), (req, res) => {
         return res.status(400).send('No file uploaded.');
     }
 
-    const name = req.file.name;
-    const oriName = req.file.oriName;
+    const fileName = req.file.filename;
+    const origName = req.file.origName;
     const option = req.body.option;
 
     let command = '';
     if (option === 'normal') {
-        command = `java -jar ../unluac.jar ${name} -o ${oriName}.dec`;
+        command = `java -jar ../unluac.jar ${fileName} -o ${origName}.dec`;
     } else {
-        command = `java -jar ../unluac.jar --${option} ${name} -o ${oriName}.dec`;
+        command = `java -jar ../unluac.jar --${option} ${fileName} -o ${origName}.dec`;
     }
 
     exec(command, { cwd: 'uploads' }, (error, stdout, stderr) => {
@@ -36,17 +36,17 @@ app.post('/upload', upload.single('luaFile'), (req, res) => {
             return res.status(500).send('Error processing file');
         }
 
-        const filePath = path.join(__dirname, '../uploads', `${oriName}.dec`);
-        res.download(filePath, `${oriName}.dec`, (err) => {
+        const filePath = path.join(__dirname, '../uploads', `${origName}.dec`);
+        res.download(filePath, `${origName}.dec`, (err) => {
             if (err) {
                 console.error('Error downloading file:', err);
                 return res.status(500).send('Error downloading file');
             }
-            // menghapus file setelah selesai di proses
+
             fs.unlink(filePath, (err) => {
                 if (err) console.error('Error deleting processed file:', err);
             });
-            fs.unlink(path.join(__dirname, '../uploads', name), (err) => {
+            fs.unlink(path.join(__dirname, '../uploads', fileName), (err) => {
                 if (err) console.error('Error deleting uploaded file:', err);
             });
         });
