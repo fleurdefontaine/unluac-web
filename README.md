@@ -18,7 +18,7 @@ Apk Termux: [Download here.](https://f-droid.org/repo/com.termux_1000.apk)
 
 ### Termux (Android)
 ```bash
-pkg install curl && curl https://raw.githubusercontent.com/fleurdefontaine/unluac-web/main/setup.sh && chmod +x ./setup.sh && ./setup.sh
+pkg install curl && curl https://raw.githubusercontent.com/fleurdefontaine/unluac-web/main/setup.sh -o setup.sh && chmod +x ./setup.sh && ./setup.sh
 ```
 
 Jika sudah melakukan instalasi dependencies, hanya perlu "node ." di dalam directory "unluac-web".
